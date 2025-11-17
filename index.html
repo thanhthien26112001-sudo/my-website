@@ -14,7 +14,7 @@
         font-family: Arial, sans-serif;
     }
 
-    /* === AVATAR KIỂU 1 === */
+    /* === AVATAR KIỂU 1 TRÊN ĐẦU === */
     .top-avatar-box {
         position: fixed;
         top: 18px;
@@ -59,22 +59,23 @@
         white-space: nowrap;
     }
 
-    /* ẨN BUBBLE */
+    /* ẨN TOÀN BỘ BUBBLE GÓC */
     #livechat-compact-container,
-    #livechat-eye-catcher,
-    #livechat-init,
+    iframe[src*="compact"],
     .lc-compact,
-    iframe[src*="compact"] {
+    #livechat-eye-catcher,
+    div[id*="bubble"],
+    img[src*="avatar"] {
         display: none !important;
-        opacity: 0 !important;
         visibility: hidden !important;
+        opacity: 0 !important;
         pointer-events: none !important;
     }
 </style>
 </head>
 <body>
 
-<!-- AVATAR TRÊN -->
+<!-- AVATAR KIỂU 1 -->
 <div class="top-avatar-box">
     <div class="avatar-wrapper">
         <img src="avatar.jpg" class="avatar">
@@ -100,16 +101,16 @@ window.LiveChatWidget.on = function (event, callback) {
             } catch (e) {}
         };
 
-        /* MỞ LUÔN CỬA SỔ CHAT */
+        /* HIỂN THỊ THẲNG CỬA SỔ CHAT */
         const openChat = () => {
             try {
                 LiveChatWidget.call("maximize");
                 LiveChatWidget.call("open_chat_window");
-            } catch(e){}
+            } catch (e) {}
         };
 
-        setTimeout(hideBubble, 200);
-        setTimeout(openChat, 400);   // mở chat sau khi widget load
+        setTimeout(hideBubble, 150);
+        setTimeout(openChat, 400); // mở chat sau khi widget load
     }
 };
 </script>
