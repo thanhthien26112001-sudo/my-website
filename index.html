@@ -15,7 +15,7 @@
         font-family: Arial, sans-serif;
       }
 
-      /* Khung tên đơn thuần */
+      /* Khung tên */
       .top-box {
         position: fixed;
         top: 18px;
@@ -37,22 +37,23 @@
         white-space: nowrap;
       }
 
-      /* Ẩn bubble LiveChat */
+      /* Ẩn avatar/bubble */
       #livechat-compact-container,
       #livechat-eye-catcher,
-      div[id*="bubble"] {
+      div[id*="bubble"],
+      img[src*="avatar"] {
         display: none !important;
       }
     </style>
 </head>
 <body>
 
-  <!-- Chỉ còn tên Vision Nguyễn -->
+  <!-- Chỉ hiển thị tên -->
   <div class="top-box">
     <div class="name">Vision Nguyễn</div>
   </div>
 
-  <!-- LIVECHAT CODE -->
+  <!-- LIVECHAT CODE CHUẨN -->
   <script>
       window.__lc = window.__lc || {};
       window.__lc.license = 19355574;
@@ -60,52 +61,53 @@
       window.__lc.product_name = "livechat";
 
       (function(n,t,c){
-          function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}
-          var e={_q:[],_h:null,_v:"2.0",
-              on:function(){i(["on",c.call(arguments)])},
-              once:function(){i(["once",c.call(arguments)])},
-              off:function(){i(["off",c.call(arguments)])},
-              get:function(){
-                  if(!e._h) throw new Error("[LiveChatWidget] You can't use getters before load.");
-                  return i(["get",c.call(arguments)])
-              },
-              call:function(){i(["call",c.call(arguments)])},
-              init:function(){
-                  var n=t.createElement("script");
-                  n.async=!0;
-                  n.type="text/javascript";
-                  n.src="https://cdn.livechatinc.com/tracking.js";
-                  t.head.appendChild(n);
-              }
+          function i(n){return e._h ? e._h.apply(null,n) : e._q.push(n)}
+          var e={
+            _q:[], _h:null, _v:"2.0",
+            on:function(){i(["on",c.call(arguments)])},
+            once:function(){i(["once",c.call(arguments)])},
+            off:function(){i(["off",c.call(arguments)])},
+            get:function(){ if(!e._h) throw new Error("Widget chưa load."); return i(["get",c.call(arguments)])},
+            call:function(){i(["call",c.call(arguments)])},
+            init:function(){
+                var n=t.createElement("script");
+                n.async=true;
+                n.src="https://cdn.livechatinc.com/tracking.js";
+                t.head.appendChild(n);
+            }
           };
           !n.__lc.asyncInit && e.init();
           n.LiveChatWidget = n.LiveChatWidget || e;
       })(window,document,[].slice);
   </script>
 
-  <!-- Auto popup + greeting -->
+  <!-- AUTO OPEN + GREETING AN TOÀN 100% -->
   <script>
-      LiveChatWidget.on('ready', function() {
+      window.addEventListener("load", function() {
 
-          // Ẩn bubble
-          try { LiveChatWidget.call('hide'); } catch(e){}
+          LiveChatWidget.on('ready', function() {
 
-          // Mở chat tự động
-          setTimeout(function(){
-              try {
-                  LiveChatWidget.call('maximize');
-                  LiveChatWidget.call('open_chat_window');
-              } catch(e){}
-          }, 500);
+              // Ẩn bubble/avatar
+              try { LiveChatWidget.call('hide'); } catch(e){}
 
-          // Lời chào tự động
-          setTimeout(function(){
-              try {
-                  LiveChatWidget.call('set_custom_variables', {
-                      greeting: "Xin chào! Tôi có thể hỗ trợ gì cho bạn?"
-                  });
-              } catch(e){}
-          }, 900);
+              // Mở chat tự động
+              setTimeout(function(){
+                  try {
+                      LiveChatWidget.call('maximize');
+                      LiveChatWidget.call('open_chat_window');
+                  } catch(e){}
+              }, 500);
+
+              // Lời chào tự động
+              setTimeout(function(){
+                  try {
+                      LiveChatWidget.call('set_custom_variables', {
+                          greeting: "Xin chào! Tôi có thể hỗ trợ gì cho bạn?"
+                      });
+                  } catch(e){}
+              }, 900);
+          });
+
       });
   </script>
 
