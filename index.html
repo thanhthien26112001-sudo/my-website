@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <title>Tên miền chính hãng HIT.CLUB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- FAVICON CHUẨN -->
     <link rel="icon" href="logo_livechat.png" type="image/png">
 
     <style>
@@ -17,7 +15,6 @@
         font-family: Arial, sans-serif;
       }
 
-      /* Thanh tên phía trên */
       .top-avatar-box {
         position: fixed;
         top: 18px;
@@ -39,47 +36,41 @@
         white-space: nowrap;
       }
 
-      /* Bỏ toàn bộ bong bóng, eye-catcher, compact LiveChat */
+      /* Chỉ ẩn bubble và eye-catcher — KHÔNG ẩn widget chat */
       #livechat-compact-container,
       #livechat-eye-catcher,
-      div[id*="chat-widget"] ,
       div[id*="bubble"],
-      iframe[src*="eye-catcher"],
-      div[class*="lc-"] {
+      iframe[src*="eye-catcher"] {
         display: none !important;
       }
     </style>
 </head>
 
 <body>
-  <!-- Thanh tên -->
   <div class="top-avatar-box">
     <div class="name">Vision Nguyễn</div>
   </div>
 
-  <!-- Script LiveChat -->
   <script>
     window.__lc = window.__lc || {};
     window.__lc.license = 19355574;
 
     window.LiveChatWidget = window.LiveChatWidget || {};
 
-    window.LiveChatWidget.on = function (event, callback) {
-      if (event === "ready") {
-        callback();
+    // Khi widget sẵn sàng
+    window.LiveChatWidget.on("ready", function () {
 
-        // Ẩn toàn bộ widget trước
-        try { LiveChatWidget.call("hide"); } catch (e) {}
+        // Ẩn bubble
+        try { LiveChatWidget.call("hide"); } catch(e) {}
 
-        // Tự động bật cửa sổ chat
+        // Tự bật cửa sổ chat
         setTimeout(function() {
-          try {
-            LiveChatWidget.call("maximize");
-            LiveChatWidget.call("open_chat_window");
-          } catch (e) {}
-        }, 400);
-      }
-    };
+            try {
+                LiveChatWidget.call("maximize");
+                LiveChatWidget.call("open_chat_window");
+            } catch(e) {}
+        }, 500);
+    });
   </script>
 
   <script src="https://cdn.livechatinc.com/tracking.js" async></script>
