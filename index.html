@@ -1,93 +1,95 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <title>LiveChat (debug)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    html,body { height:100%; margin:0; padding:0; background:#fff; overflow:hidden; }
-    /* Ép widget full */
-    #livechat-compact-container,
-    #livechat-compact-view,
-    #livechat-full,
-    #lc_container,
-    #lc_chat_layout,
-    #lc_frame,
-    #lc_wrapper,
-    #chat-widget-container,
-    #livechat-app {
-      position: fixed !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100vh !important;
-      max-width:100% !important;
-      max-height:100vh !important;
-      margin:0 !important;
-      padding:0 !important;
-      border-radius:0 !important;
-      background:#fff !important;
-      z-index:99999 !important;
-    }
-    #livechat-badge, #livechat-popup { display:none !important; }
-    /* Hộp thông báo debug */
-    #debug {
-      position: fixed; top:8px; left:8px; z-index:100000; background:#f7f7f7;
-      padding:8px 10px; border-radius:6px; font-family:Arial; font-size:13px;
-      box-shadow:0 2px 8px rgba(0,0,0,.1);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Tên miền chính hãng HIT.CLUB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo_livechat.png" type="image/png" sizes="32x32">
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+      }
+
+      .top-box {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ffffff;
+        padding: 10px 24px;
+        border-radius: 40px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+        z-index: 99999;
+      }
+
+      .name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #000;
+        white-space: nowrap;
+      }
+
+      /* Nội dung trang để không bị trắng */
+      .content {
+        margin-top: 120px;
+        text-align: center;
+        font-size: 20px;
+        color: #333;
+      }
+    </style>
 </head>
 <body>
-  <div id="debug">Đang tải LiveChat... Mở console (F12) để xem trạng thái.</div>
 
+  <!-- TITLE -->
+  <div class="top-box">
+    <div class="name">Vision Nguyễn</div>
+  </div>
+
+  <!-- NỘI DUNG ĐỂ KHÔNG BỊ TRẮNG -->
+  <div class="content">
+      Website đang hoạt động – LiveChat đang tải…
+  </div>
+
+  <!-- LIVECHAT CODE -->
   <script>
-    // cấu hình license
-    window.__lc = window.__lc || {};
-    window.__lc.license = 19355574;
-    window.__lc.integration_name = "manual_channels";
-    window.__lc.product_name = "livechat";
+      window.__lc = window.__lc || {};
+      window.__lc.license = 19355574;
+      window.__lc.integration_name = "manual_channels";
+      window.__lc.product_name = "livechat";
 
-    // tải script chính và báo lỗi nếu không tải được
-    (function(n,t,c){
-      function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}
-      var e={_q:[],_h:null,_v:"2.0",
-        on:function(){i(["on",Array.prototype.slice.call(arguments)])},
-        once:function(){i(["once",Array.prototype.slice.call(arguments)])},
-        off:function(){i(["off",Array.prototype.slice.call(arguments)])},
-        get:function(){if(!e._h)throw new Error("Widget chưa load.");return i(["get",Array.prototype.slice.call(arguments)])},
-        call:function(){i(["call",Array.prototype.slice.call(arguments)])},
-        init:function(){
-          var s = t.createElement("script");
-          s.async = true;
-          s.src = "https://cdn.livechatinc.com/tracking.js";
-          s.onload = function(){ console.log("tracking.js loaded"); };
-          s.onerror = function(){ console.error("Không thể tải tracking.js"); document.getElementById('debug').innerText = 'Lỗi: không tải được tracking.js (xem console).'; };
-          t.head.appendChild(s);
-        }
-      };
-      !n.__lc.asyncInit && e.init();
-      n.LiveChatWidget = n.LiveChatWidget || e;
-    })(window, document, [].slice);
-
-    // Sau khi sẵn sàng, gọi maximize
-    // Lưu ý: nếu widget chưa load thì on('ready') không chạy — mở console để kiểm tra
-    try {
-      LiveChatWidget.on('ready', function() {
-        console.log("LiveChat ready -> maximize()");
-        LiveChatWidget.call('maximize');
-        document.getElementById('debug').style.display = 'none';
-      });
-    } catch(err) {
-      console.warn("LiveChatWidget.on chưa có sẵn. Sẽ thử gọi lại sau 1s.", err);
-      setTimeout(function(){
-        try {
-          LiveChatWidget.on('ready', function() {
-            LiveChatWidget.call('maximize');
-            document.getElementById('debug').style.display = 'none';
-          });
-        } catch(e){ console.error("Vẫn chưa khởi tạo LiveChatWidget:", e); }
-      }, 1000);
-    }
+      (function(n,t,c){
+          function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}
+          var e={_q:[],_h:null,_v:"2.0",
+              on:function(){i(["on",c.call(arguments)])},
+              once:function(){i(["once",c.call(arguments)])},
+              off:function(){i(["off",c.call(arguments)])},
+              get:function(){if(!e._h)throw new Error("Widget chưa load.");return i(["get",c.call(arguments)])},
+              call:function(){i(["call",c.call(arguments)])},
+              init:function(){
+                  var n=t.createElement("script");
+                  n.async=true;
+                  n.src="https://cdn.livechatinc.com/tracking.js";
+                  t.head.appendChild(n);
+              }
+          };
+          !n.__lc.asyncInit && e.init();
+          n.LiveChatWidget = n.LiveChatWidget || e;
+      })(window,document,[].slice);
   </script>
+
+  <!-- TỰ ĐỘNG MỞ CHAT -->
+  <script>
+      LiveChatWidget.on('ready', function() {
+          setTimeout(function(){
+              LiveChatWidget.call('maximize');
+          }, 800);
+      });
+  </script>
+
 </body>
 </html>
