@@ -2,92 +2,81 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <title>Tên miền chính hãng HIT.CLUB</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang web của tôi</title>
+    <link rel="icon" href="logo_livechat.png" type="image/png" sizes="32x32">
 
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+      }
 
-        .header {
-            width: 100%;
-            text-align: center;
-            padding: 20px 0;
-        }
+      /* Khung tên */
+      .top-box {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ffffff;
+        padding: 10px 24px;
+        border-radius: 40px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+        z-index: 99999;
+      }
 
-        .header .btn {
-            padding: 12px 25px;
-            border-radius: 30px;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-            display: inline-block;
-            font-weight: bold;
-        }
+      .name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #000;
+        white-space: nowrap;
+      }
     </style>
 </head>
-
 <body>
 
-    <div class="header">
-        <div class="btn">Vision Nguyễn</div>
-    </div>
+  <div class="top-box">
+    <div class="name">Vision Nguyễn</div>
+  </div>
 
-    <!-- START LIVECHAT -->
-    <script>
-        window.__lc = window.__lc || {};
-        window.__lc.license = 19355574;
-        window.__lc.integration_name = "manual_channels";
-        window.__lc.product_name = "livechat";
+  <!-- LIVECHAT CODE -->
+  <script>
+      window.__lc = window.__lc || {};
+      window.__lc.license = 19355574;
+      window.__lc.integration_name = "manual_channels";
+      window.__lc.product_name = "livechat";
 
-        (function(n, t, c) {
-            function i(n) { return e._h ? e._h.apply(null, n) : e._q.push(n) }
-            var e = {
-                _q: [],
-                _h: null,
-                _v: "2.0",
-                on: function() { i(["on", c.call(arguments)]) },
-                once: function() { i(["once", c.call(arguments)]) },
-                off: function() { i(["off", c.call(arguments)]) },
-                get: function() {
-                    if (!e._h) throw new Error("LiveChat chưa tải.");
-                    return i(["get", c.call(arguments)])
-                },
-                call: function() { i(["call", c.call(arguments)]) },
-                init: function() {
-                    var n = t.createElement("script");
-                    n.async = true;
-                    n.src = "https://cdn.livechatinc.com/widget/2.0/widget.js";
-                    t.head.appendChild(n);
-                }
-            };
-            !n.LiveChat && (n.LiveChat = e);
-            n.LiveChatWidget = {
-                init: e.init,
-                call: e.call,
-                on: e.on,
-                once: e.once,
-                off: e.off
-            };
-        })(window, document, [].slice);
+      (function(n,t,c){
+          function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}
+          var e={_q:[],_h:null,_v:"2.0",
+              on:function(){i(["on",c.call(arguments)])},
+              once:function(){i(["once",c.call(arguments)])},
+              off:function(){i(["off",c.call(arguments)])},
+              get:function(){if(!e._h)throw new Error("Widget chưa load.");return i(["get",c.call(arguments)])},
+              call:function(){i(["call",c.call(arguments)])},
+              init:function(){
+                  var n=t.createElement("script");
+                  n.async=true;
+                  n.src="https://cdn.livechatinc.com/tracking.js";
+                  t.head.appendChild(n);
+              }
+          };
+          !n.__lc.asyncInit && e.init();
+          n.LiveChatWidget = n.LiveChatWidget || e;
+      })(window,document,[].slice);
+  </script>
 
-        LiveChatWidget.init();
-
-        // CHỈ MỞ KHI LIVECHAT LOAD THÀNH CÔNG
-        LiveChatWidget.on("ready", function() {
-            setTimeout(() => {
-                try {
-                    LiveChatWidget.call("maximize");
-                } catch(e) {
-                    console.log("Không mở được LiveChat:", e);
-                }
-            }, 1000);
-        });
-    </script>
-    <!-- END LIVECHAT -->
+  <!-- AUTO OPEN CHAT -->
+  <script>
+      LiveChatWidget.on('ready', function() {
+          setTimeout(function(){
+              LiveChatWidget.call('maximize'); // mở ô chat
+          }, 800);
+      });
+  </script>
 
 </body>
 </html>
